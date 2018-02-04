@@ -40,12 +40,53 @@ public class State {
 		return true;
 	}
 	
+	// check whether an action is valid
 	public boolean isValidAction(Action action) {
 		int pos = action.getPosition();
 		int row = (pos - 1) / 3;
 		int col = (pos - 1) % 3;
 		
-		return 
+		return board[row][col] == 0 ? true : false;
+	}
+	
+	// update state according to the action
+	public void update (Action action) {
+		int pos = action.getPosition();
+		int row = (pos - 1) / 3;
+		int col = (pos - 1) % 3;
+		
+		if (turn == 1) {
+			board[row][col] = 1;
+		} else if (turn == -1) {
+			board[row][col] = -1;
+		} else {
+			try {
+				throw new Exception("No such turn: " + turn);
+			} catch (Exception e) {
+				System.err.print(e.getMessage());
+			}
+		}
+	}
+	
+	// check whether this state is terminal when the action is taken
+	public boolean isTerminal(Action action) {
+		int pos = action.getPosition();
+		int row = (pos - 1) / 3;
+		int col = (pos - 1) % 3;
+		
+		if (board[row][0] + board[row][1] + board[row][2] == 3 || board[row][0] + board[row][1] + board[row][2] == -3 ||
+			board[0][col] + board[1][col] + board[2][col] == 3 || board[0][col] + board[1][col] + board[2][col] == -3 ||
+			board[0][0] + board[1][1] + board[2][2] == 3 || board[0][0] + board[1][1] + board[2][2] == -3 ||
+			board[0][2] + board[1][1] + board[2][0] == 3 || board[0][2] + board[1][1] + board[2][0] == -3) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	// return utility when the state is terminal
+	public int calUtility() {
+		return 0;
 	}
 	
 	// getters
