@@ -6,24 +6,24 @@ public class Action {
 
 
 
-	private int postion;
+	private int position;
 
 	/**
-	 * @return postion
+	 * @return position
 	 */
-	public int getPostion() {
-		return postion;
+	public int getPosition() {
+		return position;
 	}
 
 	/**
 	 * @param postion
 	 */
-	public void setPostion(int postion) {
-		this.postion = postion;
+	public void setPosition(int position) {
+		this.position = position;
 	}
 	
-	public Action(int postion){
-		this.setPostion(postion);
+	public Action(Action act){
+		this.setPosition(act.getPosition());
 	}
 	
 	Action(){}

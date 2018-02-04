@@ -8,23 +8,23 @@ import model.Action;
 import model.State;
 
 public class Interaction {
-	static int selectRole() {
+	public static int selectRole() {
 		System.err.println("Welcome to Tic-Tac-Toe");
 		System.err.println("Please select your side ( 1 as X and -1 as O ):");
 		BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
 		try {
 			return Integer.parseInt(stdIn.readLine());
 		} catch (NumberFormatException e) {
-			// TODO 自动生成的 catch 块
+
 			e.printStackTrace();
 			return 0;
 		} catch (IOException e) {
-			// TODO 自动生成的 catch 块
+
 			e.printStackTrace();
 			return 0;
 		}
 	}
-	static void displayBoard(State state) {
+	public static void displayBoard(State state) {
 		System.err.println("The current board status is:");
 		String board_dis = "";
 		int[][] board = state.getBoard();
@@ -46,18 +46,18 @@ public class Interaction {
 
 	}
 	
-	Action play()  {
+	public static Action play()  {
 		System.err.println("Please select your next move:");
 		BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
 		try {
 			return new Action(Integer.parseInt(stdIn.readLine()));
 			
 		} catch (NumberFormatException e) {
-			// TODO 自动生成的 catch 块
+
 			e.printStackTrace();
 			return null;
 		} catch (IOException e) {
-			// TODO 自动生成的 catch 块
+
 			e.printStackTrace();
 			return null;
 		}
