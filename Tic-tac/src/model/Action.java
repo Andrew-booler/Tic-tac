@@ -3,11 +3,23 @@ package model;
 
 
 public class Action {
-	private State previous;
-	private State post;
-	private int mark;
+
+
+
 	private int postion;
-	public State move(State pre, int mark, int position) {
-		return post;
+
+	/**
+	 * @return postion
+	 */
+	public int getPostion() {
+		return postion;
 	}
+
+	/**
+	 * @param postion ÒªÉèÖÃµÄ postion
+	 */
+	public void setPostion(int postion) {
+		this.postion = postion;
+	}
+
 }
