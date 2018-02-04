@@ -40,11 +40,13 @@ public class Interaction {
 				board_dis+="|";
 				if(board[i][j]==1) {
 					board_dis+="X";
-				}else {
+				}else if(board[i][j]==-1){
 					board_dis+="O";
+				}else {
+					board_dis+=" ";
 				}
 			}
-			board_dis+="|";
+			board_dis+="|\n";
 		}
 		board_dis+="_________\n";
 		System.err.println(board_dis);
