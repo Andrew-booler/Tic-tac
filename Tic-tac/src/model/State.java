@@ -5,12 +5,13 @@ import java.util.ArrayList;
 public class State {
 
 	private int[][] board;	// set all position to 0 (empty) by default
-	private int turn;		// +1 for X, -1 for O; set to 0 by default
+	private int turn;		// +1 for X, -1 for O; set to 1 by default
 	private int xUtility;	// +1 for win, -1 for lose, 0 for tie (in X view); set to 0 by default
 	private int oUtility;	// +1 for win, -1 for lose, 0 for tie (in O view); set to 0 by default
 	
 	// default constructor
 	public State() {
+		board = new int[3][3];
 		// initialize board
 		for (int i = 0; i < board.length; i++) {
 			for (int j = 0; j < board[i].length; j++) {
@@ -18,7 +19,7 @@ public class State {
 			}
 		}
 		// initialize turn
-		turn = 0;
+		turn = 1;
 		// initialize utility
 		xUtility = 0;
 		oUtility = 0;

@@ -7,7 +7,7 @@ import view.Interaction;
 public class Game {
 	private State currentState;
 	private int roleSelection;
-	public static void main() {
+	public static void main(String[] args) {
 		while (true) {
 			//Initial a new game
 			Game game = new Game();
