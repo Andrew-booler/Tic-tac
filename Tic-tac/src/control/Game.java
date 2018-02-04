@@ -28,51 +28,55 @@ public class Game {
 					game.getCurrentState().update(act);
 					//Check if the game is over
 					if (game.getCurrentState().isTerminal(act)) {
+						if(game.getCurrentState().getxUtility()==1) {
 						Interaction.displayBoard(game.getCurrentState());
 						Interaction.displayMsg("You win!");
 						break;
-					}else {
-						if (game.getCurrentState().isFull()) {
-							Interaction.displayBoard(game.getCurrentState());
-							Interaction.displayMsg("Tie.");
-							break;
+						}else {
+							if(game.getCurrentState().getxUtility()==0) {
+								Interaction.displayBoard(game.getCurrentState());
+								Interaction.displayMsg("Tie.");
+								break;
+							}
 						}
 					}
 					//Same steps for computer player
 					Interaction.displayBoard(game.getCurrentState());
-					act = Computer.play(game.getCurrentState());
+					act = Computer.play(game.getCurrentState(),game.getRoleSelection());
 					while (!game.getCurrentState().isValidAction(act)) {
 						Interaction.displayMsg("The Action is invalid");
-						act= Computer.play(game.getCurrentState());
+						act= Computer.play(game.getCurrentState(),game.getRoleSelection());
 					}
 					Interaction.displayMove(act);
 					game.getCurrentState().update(act);
-					if (game.getCurrentState().isTerminal(act)) {
+					if(game.getCurrentState().getxUtility()==1) {
 						Interaction.displayBoard(game.getCurrentState());
 						Interaction.displayMsg("You lose!");
 						break;
-					}
+						}
 				}
 			}else {
 				//User picks O
 				while(true) {
 					Interaction.displayBoard(game.getCurrentState());
-					Action act = Computer.play(game.getCurrentState());
+					Action act = Computer.play(game.getCurrentState(),game.getRoleSelection());
 					while (!game.getCurrentState().isValidAction(act)) {
 						Interaction.displayMsg("The Action is invalid");
-						act= Computer.play(game.getCurrentState());
+						act= Computer.play(game.getCurrentState(),game.getRoleSelection());
 					}
 					Interaction.displayMove(act);
 					game.getCurrentState().update(act);
 					if (game.getCurrentState().isTerminal(act)) {
+						if(game.getCurrentState().getoUtility()==1) {
 						Interaction.displayBoard(game.getCurrentState());
 						Interaction.displayMsg("You lose!");
 						break;
-					}else {
-						if (game.getCurrentState().isFull()) {
-							Interaction.displayBoard(game.getCurrentState());
-							Interaction.displayMsg("Tie.");
-							break;
+						}else {
+							if(game.getCurrentState().getoUtility()==0) {
+								Interaction.displayBoard(game.getCurrentState());
+								Interaction.displayMsg("Tie.");
+								break;
+							}
 						}
 					}
 					Interaction.displayBoard(game.getCurrentState());
@@ -83,11 +87,11 @@ public class Game {
 					}
 					Interaction.displayMove(act);
 					game.getCurrentState().update(act);
-					if (game.getCurrentState().isTerminal(act)) {
+					if(game.getCurrentState().getoUtility()==1) {
 						Interaction.displayBoard(game.getCurrentState());
-						Interaction.displayMsg("You lose!");
+						Interaction.displayMsg("You win!");
 						break;
-					}
+						}
 				}
 			}
 		}
