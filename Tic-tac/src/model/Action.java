@@ -21,5 +21,10 @@ public class Action {
 	public void setPostion(int postion) {
 		this.postion = postion;
 	}
-
+	
+	public Action(int postion){
+		this.setPostion(postion);
+	}
+	
+	Action(){}
 }
