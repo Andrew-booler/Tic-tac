@@ -63,4 +63,12 @@ public class Interaction {
 		}
 		
 	}
+	
+	public static void displayMsg(String msg) {
+		System.err.println(msg);
+	}
+	
+	public static void displayMove(Action act) {
+		System.out.println(act.getPostion());
+	}
 }
