@@ -1,5 +1,7 @@
 package control;
 
-public class Game {
+import model.State;
 
+public class Game {
+	private State currentState;
 }
