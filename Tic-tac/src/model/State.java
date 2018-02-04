@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class State {
 
 	private int[][] board;	// set all position to 0 (empty) by default
@@ -47,6 +49,20 @@ public class State {
 		int col = (pos - 1) % 3;
 		
 		return board[row][col] == 0 ? true : false;
+	}
+	
+	// get all applicable actions under this state
+	public ArrayList<Action> getAvlActions() {
+		ArrayList<Action> actions = new ArrayList<Action>();
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board[i].length; j++) {
+				if (board[i][j] == 0) {	// empty position
+					actions.add(new Action(3 * i + j + 1));
+				}
+			}
+		}
+		
+		return actions;
 	}
 	
 	// update state according to the action
