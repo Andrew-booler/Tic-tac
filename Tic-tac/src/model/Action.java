@@ -16,7 +16,7 @@ public class Action {
 	}
 
 	/**
-	 * @param postion ÒªÉèÖÃµÄ postion
+	 * @param postion
 	 */
 	public void setPostion(int postion) {
 		this.postion = postion;
