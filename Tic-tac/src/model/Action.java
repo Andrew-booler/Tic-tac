@@ -26,5 +26,9 @@ public class Action {
 		this.setPosition(act.getPosition());
 	}
 	
+	public Action(int position) {
+		this.setPosition(position);
+	}
+	
 	Action(){}
 }
