@@ -10,10 +10,15 @@ import model.State;
 public class Interaction {
 	public static int selectRole() {
 		System.err.println("Welcome to Tic-Tac-Toe");
-		System.err.println("Please select your side ( 1 as X and -1 as O ):");
+		System.err.println("Please select your side (  X or O ):");
 		BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
 		try {
-			return Integer.parseInt(stdIn.readLine());
+			if(stdIn.readLine().toLowerCase().contains("x")) {
+				return 1;
+			}
+			else {
+				return -1;
+			}
 		} catch (NumberFormatException e) {
 
 			e.printStackTrace();
