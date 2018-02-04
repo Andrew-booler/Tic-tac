@@ -1,19 +1,19 @@
 package model;
 
 public class State {
-	private int[][] board;
+	private int[] board;
 	private int turn;
 	private int utility;
 	/**
 	 * @return board
 	 */
-	public int[][] getBoard() {
+	public int[] getBoard() {
 		return board;
 	}
 	/**
 	 * @param board ÒªÉèÖÃµÄ board
 	 */
-	public void setBoard(int[][] board) {
+	public void setBoard(int[] board) {
 		this.board = board;
 	}
 	/**
