@@ -6,7 +6,8 @@ public class State {
 
 	private int[][] board;	// set all position to 0 (empty) by default
 	private int turn;		// +1 for X, -1 for O; set to 0 by default
-	private int utility;	// +1 for win, -1 for lose, 0 for tie (in MAX player's view); set to 0 by default
+	private int xUtility;	// +1 for win, -1 for lose, 0 for tie (in X view); set to 0 by default
+	private int oUtility;	// +1 for win, -1 for lose, 0 for tie (in O view); set to 0 by default
 	
 	// default constructor
 	public State() {
@@ -19,14 +20,16 @@ public class State {
 		// initialize turn
 		turn = 0;
 		// initialize utility
-		utility = 0;
+		xUtility = 0;
+		oUtility = 0;
 	}
 	
 	// copy constructor
 	public State(State s) {
 		board = s.getBoard();
 		turn = s.getTurn();
-		utility = s.getUtility();
+		xUtility = s.getxUtility();
+		oUtility = s.getoUtility();
 	}
 	
 	// check whether the board is full
@@ -73,8 +76,10 @@ public class State {
 		
 		if (turn == 1) {
 			board[row][col] = 1;
+			turn = -1;
 		} else if (turn == -1) {
 			board[row][col] = -1;
+			turn = 1;
 		} else {
 			try {
 				throw new Exception("No such turn: " + turn);
@@ -90,19 +95,36 @@ public class State {
 		int row = (pos - 1) / 3;
 		int col = (pos - 1) % 3;
 		
-		if (board[row][0] + board[row][1] + board[row][2] == 3 || board[row][0] + board[row][1] + board[row][2] == -3 ||
-			board[0][col] + board[1][col] + board[2][col] == 3 || board[0][col] + board[1][col] + board[2][col] == -3 ||
-			board[0][0] + board[1][1] + board[2][2] == 3 || board[0][0] + board[1][1] + board[2][2] == -3 ||
-			board[0][2] + board[1][1] + board[2][0] == 3 || board[0][2] + board[1][1] + board[2][0] == -3) {
+		if (isFull()) {
+			return true;
+		} else if (board[row][0] + board[row][1] + board[row][2] == 3 || board[row][0] + board[row][1] + board[row][2] == -3 ||
+					board[0][col] + board[1][col] + board[2][col] == 3 || board[0][col] + board[1][col] + board[2][col] == -3 ||
+					board[0][0] + board[1][1] + board[2][2] == 3 || board[0][0] + board[1][1] + board[2][2] == -3 ||
+					board[0][2] + board[1][1] + board[2][0] == 3 || board[0][2] + board[1][1] + board[2][0] == -3) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
-	// return utility when the state is terminal
-	public int calUtility() {
-		return 0;
+	// compute utility when the state is terminal
+	public void calUtility(Action action) {
+		int pos = action.getPosition();
+		int row = (pos - 1) / 3;
+		int col = (pos - 1) % 3;
+		
+		if (board[row][0] + board[row][1] + board[row][2] == 3 || board[0][col] + board[1][col] + board[2][col] == 3 ||
+			board[0][0] + board[1][1] + board[2][2] == 3 || board[0][2] + board[1][1] + board[2][0] == 3) {
+			xUtility = 1;	// X win
+			oUtility = -1;	// O win
+		} else if (board[row][0] + board[row][1] + board[row][2] == -3 || board[0][col] + board[1][col] + board[2][col] == -3 ||
+				board[0][0] + board[1][1] + board[2][2] == -3 || board[0][2] + board[1][1] + board[2][0] == -3) {
+			xUtility = -1;
+			oUtility = 1;
+		} else if (isFull()) {
+			xUtility = 0;
+			oUtility = 0;
+		}
 	}
 	
 	// getters
@@ -114,7 +136,11 @@ public class State {
 		return turn;
 	}
 
-	public int getUtility() {
-		return utility;
+	public int getxUtility() {
+		return xUtility;
+	}
+	
+	public int getoUtility() {
+		return oUtility;
 	}
 }
