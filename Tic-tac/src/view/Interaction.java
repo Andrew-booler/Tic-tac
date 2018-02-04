@@ -69,6 +69,6 @@ public class Interaction {
 	}
 	
 	public static void displayMove(Action act) {
-		System.out.println(act.getPostion());
+		System.out.println(act.getPosition());
 	}
 }
