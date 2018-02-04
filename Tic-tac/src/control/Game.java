@@ -12,5 +12,17 @@ public class Game {
 		currentState = new State();
 		
 	}
+	/**
+	 * @return roleSelection
+	 */
+	public int getRoleSelection() {
+		return roleSelection;
+	}
+	/**
+	 * @param roleSelection ÒªÉèÖÃµÄ roleSelection
+	 */
+	public void setRoleSelection(int roleSelection) {
+		this.roleSelection = roleSelection;
+	}
 
 }
