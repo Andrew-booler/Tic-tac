@@ -1,5 +1,6 @@
 package control;
 
+import model.Action;
 import model.State;
 import view.Interaction;
 
@@ -12,7 +13,23 @@ public class Game {
 			if (game.getRoleSelection()==1) {
 				while(true) {
 					Interaction.displayBoard(game.getCurrentState());
-					Action act = null;
+					Action act = Interaction.play();
+					while (!game.getCurrentState().isActionValid(act)) {
+						Interaction.displayMsg("The Action is invalid");
+						act= Interaction.play();
+					}
+					game.getCurrentState().update(act);
+					if (game.getCurrentState().isTerminal()) {
+						Interaction.displayBoard(game.getCurrentState());
+						Interaction.displayMsg("You win!");
+						break;
+					}else {
+						if (game.getCurrentState().isFull()) {
+							Interaction.displayBoard(game.getCurrentState());
+							Interaction.displayMsg("Tie.");
+							break;
+						}
+					}
 					
 				}
 			}
