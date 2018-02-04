@@ -14,12 +14,12 @@ public class Game {
 				while(true) {
 					Interaction.displayBoard(game.getCurrentState());
 					Action act = Interaction.play();
-					while (!game.getCurrentState().isActionValid(act)) {
+					while (!game.getCurrentState().isValidAction(act)) {
 						Interaction.displayMsg("The Action is invalid");
 						act= Interaction.play();
 					}
 					game.getCurrentState().update(act);
-					if (game.getCurrentState().isTerminal()) {
+					if (game.getCurrentState().isTerminal(act)) {
 						Interaction.displayBoard(game.getCurrentState());
 						Interaction.displayMsg("You win!");
 						break;
@@ -30,7 +30,53 @@ public class Game {
 							break;
 						}
 					}
-					
+					Interaction.displayBoard(game.getCurrentState());
+					act = Computer.play(game.getCurrentState());
+					while (!game.getCurrentState().isValidAction(act)) {
+						Interaction.displayMsg("The Action is invalid");
+						act= Computer.play(game.getCurrentState());
+					}
+					Interaction.displayMove(act);
+					game.getCurrentState().update(act);
+					if (game.getCurrentState().isTerminal(act)) {
+						Interaction.displayBoard(game.getCurrentState());
+						Interaction.displayMsg("You lose!");
+						break;
+					}
+				}
+			}else {
+				while(true) {
+					Interaction.displayBoard(game.getCurrentState());
+					Action act = Computer.play(game.getCurrentState());
+					while (!game.getCurrentState().isValidAction(act)) {
+						Interaction.displayMsg("The Action is invalid");
+						act= Computer.play(game.getCurrentState());
+					}
+					Interaction.displayMove(act);
+					game.getCurrentState().update(act);
+					if (game.getCurrentState().isTerminal(act)) {
+						Interaction.displayBoard(game.getCurrentState());
+						Interaction.displayMsg("You lose!");
+						break;
+					}else {
+						if (game.getCurrentState().isFull()) {
+							Interaction.displayBoard(game.getCurrentState());
+							Interaction.displayMsg("Tie.");
+							break;
+						}
+					}
+					Interaction.displayBoard(game.getCurrentState());
+					act = Interaction.play();
+					while (!game.getCurrentState().isValidAction(act)) {
+						Interaction.displayMsg("The Action is invalid");
+						act= Interaction.play();
+					}
+					game.getCurrentState().update(act);
+					if (game.getCurrentState().isTerminal(act)) {
+						Interaction.displayBoard(game.getCurrentState());
+						Interaction.displayMsg("You lose!");
+						break;
+					}
 				}
 			}
 		}
