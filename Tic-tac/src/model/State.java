@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class State {
-	private static int counter=0;
-	public static int getCounter() {
-		return counter;
-	}
 
 	private int[][] board;	// set all position to 0 (empty) by default
 	private int turn;		// +1 for X, -1 for O; set to 1 by default
@@ -89,29 +85,12 @@ public class State {
 	
 	// check whether this state is terminal when the action is taken
 	public boolean isTerminal() {
-//		int pos = action.getPosition();
-//		int row = (pos - 1) / 3;
-//		int col = (pos - 1) % 3;
-//		
-//		if (isFull()) {
-//			return true;
-//		} else if (board[row][0] + board[row][1] + board[row][2] == 3 || board[row][0] + board[row][1] + board[row][2] == -3 ||
-//					board[0][col] + board[1][col] + board[2][col] == 3 || board[0][col] + board[1][col] + board[2][col] == -3 ||
-//					board[0][0] + board[1][1] + board[2][2] == 3 || board[0][0] + board[1][1] + board[2][2] == -3 ||
-//					board[0][2] + board[1][1] + board[2][0] == 3 || board[0][2] + board[1][1] + board[2][0] == -3) {
-//			return true;
-//		} else {
-//			return false;
-//		}
-		
 		if (isFull()) {
-			counter+=1;
 			return true;
 		} else if (getRowSum(0) == 3 || getRowSum(1) == 3 || getRowSum(2) == 3 || getColSum(0) == 3 || getColSum(1) == 3 || getColSum(2) == 3 ||
 					board[0][0] + board[1][1] + board[2][2] == 3 || board[0][2] + board[1][1] + board[2][0] == 3 ||
 					getRowSum(0) == -3 || getRowSum(1) == -3 || getRowSum(2) == -3 || getColSum(0) == -3 || getColSum(1) == -3 || getColSum(2) == -3 ||
 					board[0][0] + board[1][1] + board[2][2] == -3 || board[0][2] + board[1][1] + board[2][0] == -3) {
-			counter+=1;
 			return true;
 		} else {
 			return false;
@@ -120,23 +99,6 @@ public class State {
 	
 	// compute utility when the state is terminal
 	public void calUtility() {
-//		int pos = action.getPosition();
-//		int row = (pos - 1) / 3;
-//		int col = (pos - 1) % 3;
-//		
-//		if (board[row][0] + board[row][1] + board[row][2] == 3 || board[0][col] + board[1][col] + board[2][col] == 3 ||
-//			board[0][0] + board[1][1] + board[2][2] == 3 || board[0][2] + board[1][1] + board[2][0] == 3) {
-//			xUtility = 1;	// X win
-//			oUtility = -1;	// O win
-//		} else if (board[row][0] + board[row][1] + board[row][2] == -3 || board[0][col] + board[1][col] + board[2][col] == -3 ||
-//				board[0][0] + board[1][1] + board[2][2] == -3 || board[0][2] + board[1][1] + board[2][0] == -3) {
-//			xUtility = -1;
-//			oUtility = 1;
-//		} else if (isFull()) {
-//			xUtility = 0;
-//			oUtility = 0;
-//		}
-		
 		if (getRowSum(0) == 3 || getRowSum(1) == 3 || getRowSum(2) == 3 || getColSum(0) == 3 || getColSum(1) == 3 || getColSum(2) == 3 ||
 				board[0][0] + board[1][1] + board[2][2] == 3 || board[0][2] + board[1][1] + board[2][0] == 3) {
 			xUtility = 1;	// X win

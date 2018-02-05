@@ -28,7 +28,6 @@ public class Computer {
 				bestAction = a;
 			}
 		}
-		System.out.println(State.getCounter());
 		return bestAction;
 	}
 	
