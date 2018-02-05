@@ -7,7 +7,7 @@ import view.Interaction;
 public class Game {
 	private State currentState;
 	private int roleSelection;
-	public static void main() {
+	public static void main(String[] args) {
 		while (true) {
 			//Initial a new game
 			Game game = new Game();
@@ -27,7 +27,7 @@ public class Game {
 					Interaction.displayMove(act);
 					game.getCurrentState().update(act);
 					//Check if the game is over
-					if (game.getCurrentState().isTerminal(act)) {
+					if (game.getCurrentState().isTerminal()) {
 						game.getCurrentState().calUtility(act);
 						if(game.getCurrentState().getxUtility()==1) {
 						Interaction.displayBoard(game.getCurrentState());

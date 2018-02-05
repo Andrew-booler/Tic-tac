@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Computer {
 	
-	// take the computer's input and return an action
+	// take the computer's input and its role, and return an action
 	public static Action play(State currentState, int role) {
 		// copy current state
 		State state = new State(currentState);
@@ -19,44 +19,47 @@ public class Computer {
 		int utility = Integer.MIN_VALUE;
 		Action bestAction = null;
 		ArrayList<Action> actions = state.getAvlActions();	// all applicable actions for this state
-		for (Action action : actions) {
+		for (Action a : actions) {
 			State s = new State(state);
-			s.update(action);
-			int curUtility = minValue(s, action, role);
+			s.update(a);
+			int curUtility = minValue(s, role);
 			if (curUtility > utility) {
-				bestAction = action;
+				utility = curUtility;
+				bestAction = a;
 			}
 		}
-		
+		System.out.println(State.getCounter());
 		return bestAction;
 	}
 	
-	public static int maxValue(State state, Action action, int role) {
-		if (state.isTerminal(action)) {
-			return role == 1 ? state.getxUtility() : state.getoUtility();	// computer is X
-		} else {
-			int utility = Integer.MIN_VALUE;
-			ArrayList<Action> actions = state.getAvlActions();
-			for (Action a : actions) {
-				State s = new State(state);
-				s.update(action);
-				utility = Math.max(utility, minValue(s, a, role));
-			}
-			
-			return utility;
-		}
-	}
-	
-	public static int minValue(State state, Action action, int role) {
-		if (state.isTerminal(action)) {
-			return role == 1 ? state.getxUtility() : state.getoUtility();	// computer is O
+	public static int maxValue(State state, int role) {
+		if (state.isTerminal()) {
+			state.calUtility();
+			return role == 1 ? state.getxUtility() : state.getoUtility();	// computer's role is X
 		} else {
 			int utility = Integer.MIN_VALUE;
 			ArrayList<Action> actions = state.getAvlActions();
 			for (Action a : actions) {
 				State s = new State(state);
 				s.update(a);
-				utility = Math.min(utility, maxValue(s, a, role));
+				utility = Math.max(utility, minValue(s, role));
+			}
+			
+			return utility;
+		}
+	}
+	
+	public static int minValue(State state, int role) {
+		if (state.isTerminal()) {
+			state.calUtility();
+			return role == 1 ? state.getxUtility() : state.getoUtility();	// computer's role is O
+		} else {
+			int utility = Integer.MAX_VALUE;
+			ArrayList<Action> actions = state.getAvlActions();
+			for (Action a : actions) {
+				State s = new State(state);
+				s.update(a);
+				utility = Math.min(utility, maxValue(s, role));
 			}
 			
 			return utility;
