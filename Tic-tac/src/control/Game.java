@@ -42,10 +42,10 @@ public class Game {
 					}
 					//Same steps for computer player
 					Interaction.displayBoard(game.getCurrentState());
-					act = Computer.play(game.getCurrentState(),game.getRoleSelection());
+					act = Computer.play(game.getCurrentState(),-game.getRoleSelection());
 					while (!game.getCurrentState().isValidAction(act)) {
 						Interaction.displayMsg("The Action is invalid");
-						act= Computer.play(game.getCurrentState(),game.getRoleSelection());
+						act= Computer.play(game.getCurrentState(),-game.getRoleSelection());
 					}
 					Interaction.displayMove(act);
 					game.getCurrentState().update(act);
@@ -59,10 +59,10 @@ public class Game {
 				//User picks O
 				while(true) {
 					Interaction.displayBoard(game.getCurrentState());
-					Action act = Computer.play(game.getCurrentState(),game.getRoleSelection());
+					Action act = Computer.play(game.getCurrentState(),-game.getRoleSelection());
 					while (!game.getCurrentState().isValidAction(act)) {
 						Interaction.displayMsg("The Action is invalid");
-						act= Computer.play(game.getCurrentState(),game.getRoleSelection());
+						act= Computer.play(game.getCurrentState(),-game.getRoleSelection());
 					}
 					Interaction.displayMove(act);
 					game.getCurrentState().update(act);

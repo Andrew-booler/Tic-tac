@@ -35,7 +35,7 @@ public class Interaction {
 		int[][] board = state.getBoard();
 		//The default of board size is 3*3
 		for(int i=0;i<3;i++) {
-			board_dis+="_________\n";
+			board_dis+="-------\n";
 			for (int j=0;j<3;j++) {
 				board_dis+="|";
 				if(board[i][j]==1) {
@@ -48,7 +48,7 @@ public class Interaction {
 			}
 			board_dis+="|\n";
 		}
-		board_dis+="_________\n";
+		board_dis+="-------\n";
 		System.err.println(board_dis);
 
 	}
