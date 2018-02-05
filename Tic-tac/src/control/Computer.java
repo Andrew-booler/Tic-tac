@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Computer {
 	
-	// take the computer's input and return an action
+	// take the computer's input and its role, and return an action
 	public static Action play(State currentState, int role) {
 		// copy current state
 		State state = new State(currentState);
@@ -33,7 +33,7 @@ public class Computer {
 	
 	public static int maxValue(State state, Action action, int role) {
 		if (state.isTerminal(action)) {
-			return role == 1 ? state.getxUtility() : state.getoUtility();	// computer is X
+			return role == 1 ? state.getxUtility() : state.getoUtility();	// computer's role is X
 		} else {
 			int utility = Integer.MIN_VALUE;
 			ArrayList<Action> actions = state.getAvlActions();
@@ -49,9 +49,9 @@ public class Computer {
 	
 	public static int minValue(State state, Action action, int role) {
 		if (state.isTerminal(action)) {
-			return role == 1 ? state.getxUtility() : state.getoUtility();	// computer is O
+			return role == 1 ? state.getxUtility() : state.getoUtility();	// computer's role is O
 		} else {
-			int utility = Integer.MIN_VALUE;
+			int utility = Integer.MAX_VALUE;
 			ArrayList<Action> actions = state.getAvlActions();
 			for (Action a : actions) {
 				State s = new State(state);

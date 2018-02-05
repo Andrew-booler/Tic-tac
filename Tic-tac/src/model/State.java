@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class State {
 
@@ -27,7 +28,10 @@ public class State {
 	
 	// copy constructor
 	public State(State s) {
-		board = s.getBoard();
+		board = new int[3][3];
+		for (int i = 0; i < s.getBoard().length; i++) {
+			board[i] = Arrays.copyOf(s.getBoard()[i], s.getBoard()[i].length);
+		}
 		turn = s.getTurn();
 		xUtility = s.getxUtility();
 		oUtility = s.getoUtility();
