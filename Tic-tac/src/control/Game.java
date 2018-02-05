@@ -28,6 +28,7 @@ public class Game {
 					game.getCurrentState().update(act);
 					//Check if the game is over
 					if (game.getCurrentState().isTerminal(act)) {
+						game.getCurrentState().calUtility(act);
 						if(game.getCurrentState().getxUtility()==1) {
 						Interaction.displayBoard(game.getCurrentState());
 						Interaction.displayMsg("You win!");
