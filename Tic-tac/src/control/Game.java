@@ -28,12 +28,13 @@ public class Game {
 					game.getCurrentState().update(act);
 					//Check if the game is over
 					if (game.getCurrentState().isTerminal()) {
-						game.getCurrentState().calUtility(act);
+						game.getCurrentState().calUtility();
 						if(game.getCurrentState().getxUtility()==1) {
 						Interaction.displayBoard(game.getCurrentState());
 						Interaction.displayMsg("You win!");
 						break;
 						}else {
+							game.getCurrentState().calUtility();
 							if(game.getCurrentState().getxUtility()==0) {
 								Interaction.displayBoard(game.getCurrentState());
 								Interaction.displayMsg("Tie.");
@@ -50,11 +51,14 @@ public class Game {
 					}
 					Interaction.displayMove(act);
 					game.getCurrentState().update(act);
-					if(game.getCurrentState().getxUtility()==1) {
-						Interaction.displayBoard(game.getCurrentState());
-						Interaction.displayMsg("You lose!");
-						break;
-						}
+					if (game.getCurrentState().isTerminal()) {
+						game.getCurrentState().calUtility();
+						if(game.getCurrentState().getxUtility()==-1) {
+							Interaction.displayBoard(game.getCurrentState());
+							Interaction.displayMsg("You lose!");
+							break;
+							}
+					}
 				}
 			}else {
 				//User picks O
@@ -67,8 +71,9 @@ public class Game {
 					}
 					Interaction.displayMove(act);
 					game.getCurrentState().update(act);
-					if (game.getCurrentState().isTerminal(act)) {
-						if(game.getCurrentState().getoUtility()==1) {
+					if (game.getCurrentState().isTerminal()) {
+						game.getCurrentState().calUtility();
+						if(game.getCurrentState().getoUtility()==-1) {
 						Interaction.displayBoard(game.getCurrentState());
 						Interaction.displayMsg("You lose!");
 						break;
@@ -88,11 +93,15 @@ public class Game {
 					}
 					Interaction.displayMove(act);
 					game.getCurrentState().update(act);
-					if(game.getCurrentState().getoUtility()==1) {
-						Interaction.displayBoard(game.getCurrentState());
-						Interaction.displayMsg("You win!");
-						break;
-						}
+					if(game.getCurrentState().isTerminal()) {
+						game.getCurrentState().calUtility();
+						if(game.getCurrentState().getoUtility()==1) {
+							Interaction.displayBoard(game.getCurrentState());
+							Interaction.displayMsg("You win!");
+							break;
+							}
+					}
+					
 				}
 			}
 		}
