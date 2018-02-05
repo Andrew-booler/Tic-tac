@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class State {
-
+	
 	private int[][] board;	// set all position to 0 (empty) by default
 	private int turn;		// +1 for X, -1 for O; set to 1 by default
 	private int xUtility;	// +1 for win, -1 for lose, 0 for tie (in X view); set to 0 by default
