@@ -27,7 +27,7 @@ public class Game {
 					Interaction.displayMove(act);
 					game.getCurrentState().update(act);
 					//Check if the game is over
-					if (game.getCurrentState().isTerminal(act)) {
+					if (game.getCurrentState().isTerminal()) {
 						if(game.getCurrentState().getxUtility()==1) {
 						Interaction.displayBoard(game.getCurrentState());
 						Interaction.displayMsg("You win!");
@@ -66,7 +66,7 @@ public class Game {
 					}
 					Interaction.displayMove(act);
 					game.getCurrentState().update(act);
-					if (game.getCurrentState().isTerminal(act)) {
+					if (game.getCurrentState().isTerminal()) {
 						if(game.getCurrentState().getoUtility()==1) {
 						Interaction.displayBoard(game.getCurrentState());
 						Interaction.displayMsg("You lose!");
