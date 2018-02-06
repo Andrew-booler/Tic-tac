@@ -15,7 +15,7 @@ public class Computer {
 		return minimaxDecision(state, role);
 	} 
 	
-	public static Action minimaxDecision(State state, int role) {
+	private static Action minimaxDecision(State state, int role) {
 		int utility = Integer.MIN_VALUE;
 		Action bestAction = null;
 		ArrayList<Action> actions = state.getAvlActions();	// all applicable actions for this state
@@ -31,7 +31,7 @@ public class Computer {
 		return bestAction;
 	}
 	
-	public static int maxValue(State state, int role) {
+	private static int maxValue(State state, int role) {
 		if (state.isTerminal()) {
 			state.calUtility();
 			return role == 1 ? state.getxUtility() : state.getoUtility();	// computer's role is X
@@ -48,7 +48,7 @@ public class Computer {
 		}
 	}
 	
-	public static int minValue(State state, int role) {
+	private static int minValue(State state, int role) {
 		if (state.isTerminal()) {
 			state.calUtility();
 			return role == 1 ? state.getxUtility() : state.getoUtility();	// computer's role is O

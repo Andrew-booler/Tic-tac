@@ -83,7 +83,7 @@ public class State {
 		}
 	}
 	
-	// check whether this state is terminal when the action is taken
+	// check whether this state is terminal
 	public boolean isTerminal() {
 		if (isFull()) {
 			return true;
